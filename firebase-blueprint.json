@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with contact details, credentials and role.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "age": { "type": "number" },
+        "phone1": { "type": "string" },
+        "phone2": { "type": "string" },
+        "password": { "type": "string" },
+        "isAdmin": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "phone1", "isAdmin", "createdAt"]
+    },
+    "CatalogItem": {
+      "title": "CatalogItem",
+      "description": "Services/Clinics available in CTC catalog.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "string" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "price"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Rich chat message with reply or attachments.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "receiverId": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "readByReceiver": { "type": "boolean" },
+        "attachment": { "type": "object" },
+        "replyTo": { "type": "object" }
+      },
+      "required": ["id", "senderId", "receiverId", "text", "timestamp", "readByReceiver"]
+    },
+    "ConsultationQuestion": {
+      "title": "ConsultationQuestion",
+      "description": "Configurable questions used for client triage.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "type": { "type": "string" },
+        "required": { "type": "boolean" }
+      },
+      "required": ["id", "label", "type", "required"]
+    },
+    "ConsultationSchedule": {
+      "title": "ConsultationSchedule",
+      "description": "Patient consultation appointment requests with dynamic triage answers.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "responses": { "type": "object" },
+        "status": { "type": "string" },
+        "confirmedNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "userName", "responses", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "ctc_users/{userId}": {
+      "schema": "User",
+      "description": "Subscribed users, patients, and organization administrators."
+    },
+    "ctc_catalog/{itemId}": {
+      "schema": "CatalogItem",
+      "description": "Offered clinical services catalog."
+    },
+    "ctc_questions/{questionId}": {
+      "schema": "ConsultationQuestion",
+      "description": "Configurable forms used to triage patients before scheduling."
+    },
+    "ctc_messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Communication logs sent between patient/user channels."
+    },
+    "ctc_schedules/{scheduleId}": {
+      "schema": "ConsultationSchedule",
+      "description": "The submitted pre-consultation triage scheduling."
+    },
+    "ctc_settings/{settingId}": {
+      "schema": "object",
+      "description": "Global application configuration settings."
+    }
+  }
+}

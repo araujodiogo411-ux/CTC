@@ -1,0 +1,9 @@
+{
+  "name": "Agendador de Consultas CTC",
+  "description": "Sistema de cadastro, consultas e conversas integrado com painel de administrador e agendador dinâmico.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
